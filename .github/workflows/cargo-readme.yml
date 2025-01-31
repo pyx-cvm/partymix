@@ -1,0 +1,24 @@
+name: readme
+on: [push, pull_request]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: baptiste0928/cargo-install@v3
+        with:
+          crate: cargo-readme
+
+      - run: cargo readme > README.generated.md
+      - run: |
+          if ! diff -u README.md README.generated.md; then
+            echo "Error: README.md is out of sync with cargo-readme output"
+            echo "Please run 'cargo readme > README.md' to update it"
+            exit 1
+          fi

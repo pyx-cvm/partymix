@@ -1,0 +1,18 @@
+[package]
+name = "partymix"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.77.0"
+authors = ["Nathaniel McCallum <nathaniel.mccallum@amd.com>"]
+description = "Combines filesystem images into a disk image with MBR"
+repository = "https://github.com/pyx-cvm/partymix"
+license = "MIT"
+readme = "README.md"
+keywords = ["disk-image", "mbr", "partitioning", "filesystem"]
+categories = ["command-line-utilities", "filesystem", "os", "virtualization"]
+
+[profile.release]
+codegen-units = 1
+opt-level = 3
+strip = true
+lto = true
